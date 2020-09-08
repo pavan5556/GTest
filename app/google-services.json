@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "524487515963",
+    "firebase_url": "https://test-api-288904.firebaseio.com",
+    "project_id": "youtube-test-api-288904",
+    "storage_bucket": "youtube-test-api-288904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524487515963:android:d4008ff800047de18ce11e",
+        "android_client_info": {
+          "package_name": "com.pavan.gtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524487515963-c5bkbj54cq9hsbmghvnv10tkf1t6aitn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pavan.gtest",
+            "certificate_hash": "e603ff8c9e744c7083eba29b86244a26df3fe990"
+          }
+        },
+        {
+          "client_id": "524487515963-un5llm3s0vqcsipj1raokcirtis29qlc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdGgwuDlxbGRidCeGntC1ocJa-B-SYJXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524487515963-un5llm3s0vqcsipj1raokcirtis29qlc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
