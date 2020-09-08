@@ -2,6 +2,8 @@ package com.pavan.gtest.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements YouTubePlayer.OnI
     private boolean isfirst = true;
     private String videoId;
     private boolean isFullSreen;
+    private SearchView searchView;
+    private VideosAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements YouTubePlayer.OnI
         recyclerView.setLayoutManager(layoutManager);
         DatabaseReference reference = database.getReferenceFromUrl(BASE_URL);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        final VideosAdapter adapter = new VideosAdapter(this, viewModel);
+        adapter = new VideosAdapter(this, viewModel);
         recyclerView.setAdapter(adapter);
         youTubePlayerView = YouTubePlayerSupportFragmentX.newInstance();
         youTubePlayerView.initialize(API_KEY, MainActivity.this);
@@ -125,4 +132,35 @@ public class MainActivity extends AppCompatActivity implements YouTubePlayer.OnI
             super.onBackPressed();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.search(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.search(newText);
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.search) {
+            searchView.onActionViewExpanded();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
